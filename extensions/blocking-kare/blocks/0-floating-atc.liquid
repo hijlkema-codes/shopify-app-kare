@@ -20,8 +20,7 @@
   # LOGIC: Default center button placement
   unless button_placement
     assign button_placement = 'center'
-  end
-
+  endunless
 -%}
 
 {%- comment -%} Styles {%- endcomment -%}
@@ -51,7 +50,7 @@
 </style>
 
 {%- comment -%} Scripts {%- endcomment -%}
-<script id="hc_floating_add-to-cart_scripts"></script>
+<script id="hc_floating_add-to-cart_scripts" src="{{ '0-floating-atc.js' | asset_url }}" async></script>
 
 {% schema %}
 {
