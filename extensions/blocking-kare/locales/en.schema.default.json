@@ -1,0 +1,30 @@
+{
+    "Blocks": {
+        "FloatingATC": {
+            "Name": "Floating Add To Cart",
+            "Settings": {
+                "ButtonPlacement": {
+                    "Label": "Button placement",
+                    "Info": "Choose where to place the button."
+                },
+                "Bar": {
+                    "BackgroundColor": {
+                        "Label": "Bar background color",
+                        "Info": "The background color for the wrapping bar."
+                    },
+                    "AddShadow": {
+                        "Label": "Bar with shadow",
+                        "Info": "Add a shadow to the wrapping bar."
+                    }
+                }
+            }
+        }
+    },
+    "Syntax": {
+        "Yes": "Yes",
+        "No": "No",
+        "Start": "Start",
+        "End": "End",
+        "Center": "Center"
+    }
+}

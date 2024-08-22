@@ -1,0 +1,111 @@
+{%- comment -%}
+  This block registers tyles and scripts for a floating Add To Cart bar on the product page.
+
+  ## Inner workings
+  By default, the block will be hidden. It will only be shown when the user scrolls past the initial product description.
+  The block will be shown at the bottom of the screen and will follow the user as they scroll down the page.
+{%- endcomment -%}
+
+{%- comment -%} Variable declarations {%- endcomment -%}
+{%- liquid
+  assign settings = block.settings
+
+  assign background_color = settings.background_color
+  assign add_shadow = settings.add_shadow
+  assign button_placement = settings.button_placement
+-%}
+
+{%- comment -%} Logic {%- endcomment -%}
+{%- liquid
+  # LOGIC: Default center button placement
+  unless button_placement
+    assign button_placement = 'center'
+  end
+
+-%}
+
+{%- comment -%} Styles {%- endcomment -%}
+<style id="hc_floating_add-to-cart_styles">
+  .hc-floating-atc {
+    display: flex;
+    justify-content: {{ button_placement }};
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.2rem;
+    z-index: 99999999999999;
+    transform: translateY(200%);
+    transition: transform 0.3s ease-out;
+    background-color: {{ background_color | color_to_hsl }};
+    {% unless add_shadow == "no" %}
+      box-shadow: 0 -4px 25px rgb(0 0 0 / .25);
+    {% endunless %}
+  }
+
+  .hc-floating-atc:not([hidden="hidden"]) {
+    transform: translateY(0);
+    transition: transform 0.3s ease-in;
+  }
+</style>
+
+{%- comment -%} Scripts {%- endcomment -%}
+<script id="hc_floating_add-to-cart_scripts"></script>
+
+{% schema %}
+{
+  "name": "t:Blocks.FloatingATC.Name",
+  "target": "body",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:Blocks.FloatingATC.Settings.Bar.BackgroundColor.Label",
+      "default": "#ffffff",
+      "info": "t:Blocks.FloatingATC.Settings.Bar.BackgroundColor.Info"
+    },
+    {
+      "type": "select",
+      "id": "add_shadow",
+      "label": "t:Blocks.FloatingATC.Settings.Bar.AddShadow.Label",
+      "options": [
+        {
+          "value": "yes",
+          "label": "t:Syntax.Yes"
+        },
+        {
+          "value": "no",
+          "label": "t:Syntax.No"
+        }
+      ],
+      "default": "yes",
+      "info": "t:Blocks.FloatingATC.Settings.Bar.AddShadow.Info"
+    },
+    {
+      "type": "select",
+      "id": "button_placement",
+      "label": "t:Blocks.FloatingATC.Settings.ButtonPlacement.Label",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:Syntax.Start"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:Syntax.End"
+        },
+        {
+          "value": "center",
+          "label": "t:Syntax.Center"
+        }
+      ],
+      "default": "center",
+      "info": "t:Blocks.FloatingATC.Settings.ButtonPlacement.Info"
+    }
+  ]
+}
+{% endschema %}
