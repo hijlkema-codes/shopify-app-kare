@@ -8,7 +8,7 @@
  */
 class FloatingAddToCart {
   // static BUTTON_SELECTOR = "[data-js-product-add-to-cart]";
-  static BUTTON_SELECTOR = "[data-add-to-cart]";
+  static BUTTON_SELECTOR = "[data-js-product-add-to-cart]";
   static TEMPLATE_SELECTOR = "template[data-template='floating-atc-content']";
   static MARGIN_OFFSET = "-100px";
 
