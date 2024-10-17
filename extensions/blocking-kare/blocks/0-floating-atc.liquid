@@ -13,6 +13,7 @@
   assign background_color = settings.background_color
   assign add_shadow = settings.add_shadow
   assign button_placement = settings.button_placement
+  assign usps = settings.usps
 -%}
 
 {%- comment -%} Logic {%- endcomment -%}
@@ -27,7 +28,7 @@
 <style id="hc_floating_add-to-cart_styles">
   .hc-floating-atc {
     display: flex;
-    justify-content: {{ button_placement }};
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     bottom: 0;
@@ -37,6 +38,7 @@
     z-index: 99999999999999;
     transform: translateY(200%);
     transition: transform 0.3s ease-out;
+    gap: 1rem;
     background-color: {{ background_color | color_to_hsl }};
     {% unless add_shadow == "no" %}
       box-shadow: 0 -4px 25px rgb(0 0 0 / .25);
@@ -47,7 +49,71 @@
     transform: translateY(0);
     transition: transform 0.3s ease-in;
   }
+
+  .hc-floating-atc [data-target='add-to-cart'] {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-grow: 1;
+  }
+
+  .hc-floating-atc .add-to-cart__content {
+      display: none;
+  }
+
+  .hc-floating-atc .add-to-cart__content img {
+      grid-row: 1/3;
+  }
+
+  .hc-floating-atc .add-to-cart__usps {
+      list-style-type: none;
+      display: flex;
+      column-gap: 1rem;
+      padding-left: 0;
+      margin-left: 0;
+      overflow: scroll;
+      flex-wrap: wrap;
+  }
+
+  .hc-floating-atc .add-to-cart__usps li {
+      white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+      .hc-floating-atc .add-to-cart__content {
+          display: grid;
+          grid-template-columns: 75px auto;
+          gap: 0.5rem;
+          align-items: center;
+      }
+
+      .hc-floating-atc [data-target='add-to-cart'] {
+          flex: 0 0 auto;
+      }
+  }
 </style>
+
+{% unless product == blank %}
+{%- comment -%} Markup {%- endcomment -%}
+<template data-template='floating-atc-content'>
+  <div class="add-to-cart__content">
+      {{ product | image_url: width: 150 | image_tag }}
+
+      <strong class="add-to-cart__title">{{ product.title }}</strong>
+      <ul class="add-to-cart__usps">
+          {% assign usps_list = usps | newline_to_br | split: '<br />' %}
+
+          {% for usp in usps_list %}
+              <li>{{ usp }}</li>
+          {% endfor %}
+      </ul>
+  </div>
+
+  <div data-target='add-to-cart'>
+      <bdi class="add-to-cart__price">{{ product.price | money_without_currency }}</bdi>
+  </div>
+</template>
+{% endunless %}
 
 {%- comment -%} Scripts {%- endcomment -%}
 <script id="hc_floating_add-to-cart_scripts" src="{{ '0-floating-atc.js' | asset_url }}" async></script>
@@ -85,25 +151,10 @@
       "info": "t:Blocks.FloatingATC.Settings.Bar.AddShadow.Info"
     },
     {
-      "type": "select",
-      "id": "button_placement",
-      "label": "t:Blocks.FloatingATC.Settings.ButtonPlacement.Label",
-      "options": [
-        {
-          "value": "flex-start",
-          "label": "t:Syntax.Start"
-        },
-        {
-          "value": "flex-end",
-          "label": "t:Syntax.End"
-        },
-        {
-          "value": "center",
-          "label": "t:Syntax.Center"
-        }
-      ],
-      "default": "center",
-      "info": "t:Blocks.FloatingATC.Settings.ButtonPlacement.Info"
+        "type": "textarea",
+        "id": "usps",
+        "label": "t:Blocks.FloatingATC.Settings.Content.Usps.Label",
+        "info": "t:Blocks.FloatingATC.Settings.Content.Usps.Info"
     }
   ]
 }
