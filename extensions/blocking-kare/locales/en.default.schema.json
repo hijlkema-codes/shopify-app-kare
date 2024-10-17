@@ -16,6 +16,12 @@
                         "Label": "Bar with shadow",
                         "Info": "Add a shadow to the wrapping bar."
                     }
+                },
+                "Content": {
+                    "Usps": {
+                        "Label": "USPs",
+                        "Info": "Add one USP per line."
+                    }
                 }
             }
         }
