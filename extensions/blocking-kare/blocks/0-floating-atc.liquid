@@ -81,6 +81,14 @@
       white-space: nowrap;
   }
 
+  .hc-floating-atc .add-to-cart__price {
+      display: none;
+  }
+
+  .hc-floating-atc .button {
+      flex: 1;
+  }
+
   @media (min-width: 768px) {
       .hc-floating-atc .add-to-cart__content {
           display: grid;
@@ -91,6 +99,10 @@
 
       .hc-floating-atc [data-target='add-to-cart'] {
           flex: 0 0 auto;
+      }
+
+      .hc-floating-atc .add-to-cart__price {
+          display: block;
       }
   }
 </style>
