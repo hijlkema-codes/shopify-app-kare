@@ -24,6 +24,23 @@
                     }
                 }
             }
+        },
+        "OpeningHours": {
+            "Name": "Opening Hours",
+            "Headers": {
+                "OpeningHours": "Opening Hours",
+                "Contact": "Contact"
+            },
+            "Settings": {
+                "OpeningHours": {
+                    "Label": "Opening hours",
+                    "Info": "Add your opening hours here."
+                },
+                "ContactEmail": {
+                    "Label": "Contact e-mail",
+                    "Info": "Leave empty to hide"
+                }
+            }
         }
     },
     "Syntax": {
@@ -31,6 +48,7 @@
         "No": "No",
         "Start": "Start",
         "End": "End",
-        "Center": "Center"
+        "Center": "Center",
+        "Title": "Title"
     }
 }

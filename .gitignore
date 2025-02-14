@@ -19,3 +19,7 @@ logs
 extensions/*/build
 
 # lock files
+
+
+.nx/cache
+.nx/workspace-data

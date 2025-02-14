@@ -1,7 +1,7 @@
 /**
  * Handles the creation and display functionality of the floating add to cart.
  *
- * @version 1.0.0-dev
+ * @version 1.0.0
  * @author hijlkema.codes
  * @copyright 2024 hijlkema.codes
  * @license MIT

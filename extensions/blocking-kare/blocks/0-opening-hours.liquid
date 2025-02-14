@@ -1,0 +1,73 @@
+{% comment %}
+  This block contains the logic for a simple opening hours block.
+  The block should not be used in conjunction with an app block, but rather as a footer component.
+{% endcomment %}
+
+{% comment %} Variable declarations {% endcomment %}
+{% liquid
+  assign id = block.id
+  assign settings = block.settings
+
+  assign title = settings.title
+  assign opening_hours = settings.opening_hours
+
+  assign contact_email = settings.contact_email
+%}
+
+{% comment %} Logic  {% endcomment %}
+{% liquid
+
+%}
+
+{% comment %} Styles {% endcomment %}
+<style id="hc_opening-hours_styles"></style>
+
+{% comment %} Markup {% endcomment %}
+{%- unless title == blank -%}
+  <h2>{{ title }}</h2>
+{%- endunless -%}
+
+{%- unless opening_hours == blank -%}
+  <p>
+    {{ opening_hours | newline_to_br }}
+  </p>
+{%- endunless -%}
+
+{%- unless contact_email == blank -%}
+  <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+{%- endunless -%}
+
+{% comment %} Scripts {% endcomment %}
+
+{% schema %}
+{
+  "name": "t:Blocks.OpeningHours.Name",
+  "tag": "aside",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:Syntax.Title"
+    },
+    {
+      "type": "header",
+      "content": "t:Blocks.OpeningHours.Headers.OpeningHours"
+    },
+    {
+      "type": "textarea",
+      "id": "opening_hours",
+      "label": "t:BLocks.OpeningHours.Settings.OpeningHours.Label"
+    },
+    {
+      "type": "header",
+      "content": "t:Blocks.OpeningHours.Headers.Contact"
+    },
+    {
+      "type": "url",
+      "id": "contact_email",
+      "label": "t:Blocks.OpeningHours.Settings.ContactEmail.Label"
+    }
+  ]
+}
+{% endschema %}
